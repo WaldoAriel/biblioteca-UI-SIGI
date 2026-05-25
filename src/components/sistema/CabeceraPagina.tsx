@@ -1,6 +1,8 @@
+// src/components/sistema/CabeceraPagina.tsx
 import { Box, Breadcrumbs, Typography, Button, Stack, Paper } from '@mui/material';
 import { NavigateNext as NavigateNextIcon } from '@mui/icons-material';
 import { ReactNode } from 'react';
+import { themeTokens } from './theme';
 
 interface BreadcrumbItem {
   label: string;
@@ -35,8 +37,8 @@ export const CabeceraPagina = ({
       sx={{ 
         p: 3, 
         mb: 3, 
-        backgroundColor: '#F8F9FF',
-        border: '1px solid #f6f1ee'
+        backgroundColor: themeTokens.colors.surfaceHover,
+        border: '1px solid ${themeTokens.colors.border}'
       }}
     >
       {breadcrumbs.length > 0 && (
@@ -65,13 +67,14 @@ export const CabeceraPagina = ({
         </Breadcrumbs>
       )}
 
+      {/* Grid para mantener título/descripción a la izquierda y botones a la derecha */}
       <Box sx={{ 
-        display: 'flex', 
-        justifyContent: 'space-between', 
-        alignItems: 'flex-start',
-        flexWrap: 'wrap',
-        gap: 2
+        display: 'grid',
+        gridTemplateColumns: { xs: '1fr', sm: '1fr auto' },
+        gap: 2,
+        alignItems: 'start'
       }}>
+        {/* Columna izquierda: título y descripción */}
         <Box>
           <Typography 
             variant="h4" 
@@ -98,8 +101,17 @@ export const CabeceraPagina = ({
           )}
         </Box>
         
+        {/* Columna derecha: botones (si existen) */}
         {acciones.length > 0 && (
-          <Stack direction="row" spacing={2}>
+          <Stack 
+            direction="row" 
+            spacing={2} 
+            sx={{ 
+              alignSelf: 'center',  // centra verticalmente los botones
+              flexWrap: 'wrap',
+              gap: 1
+            }}
+          >
             {acciones.map((accion, idx) => (
               <Button
                 key={idx}

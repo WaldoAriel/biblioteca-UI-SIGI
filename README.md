@@ -131,13 +131,3 @@ Proyecto educativo. Sin licencia específica (todavía).
 ```text
 
 ---
-
-## ¿Cómo lo subís?
-
-1. **Creá el archivo** en la raíz de tu proyecto
-2. **Agregalo al repositorio**:
-
-```bash
-git add README.md
-git commit -m "Agrega README con documentación de la biblioteca"
-git push
