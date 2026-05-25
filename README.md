@@ -49,8 +49,8 @@ Es un conjunto de **componentes reutilizables** que garantizan la **consistencia
 ### 1. Clonar el repositorio
 
 ```bash
-git clone https://github.com/TU_USUARIO/sistema-gestion-institucional.git
-cd sistema-gestion-institucional
+git clone https://github.com/WaldoAriel/biblioteca-UI-SIGI
+cd biblioteca-UI-SIGI
 ```
 
 ## 2. Instalar dependencias
@@ -128,6 +128,3 @@ Desarrollado por Dani, Joa, Juan, Paco, Waldo.
 📄 Licencia
 Proyecto educativo. Sin licencia específica (todavía).
 
-```text
-
----
