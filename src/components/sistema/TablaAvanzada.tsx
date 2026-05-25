@@ -1,5 +1,5 @@
 // src/components/sistema/TablaAvanzada.tsx
-import { useState } from 'react';
+import { useState } from "react";
 import {
   Table,
   TableBody,
@@ -7,29 +7,30 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  TablePagination,
   Paper,
   IconButton,
   Stack,
   Box,
-  Typography
-} from '@mui/material';
-import { ReactNode } from 'react';
-import { themeTokens } from './theme';
+  Typography,
+} from "@mui/material";
+import { ReactNode } from "react";
+import { PaginacionSistema } from "./PaginacionSistema";
+
+import { themeTokens } from "./theme";
 
 interface Accion {
   icono: ReactNode;
   label: string;
   onClick: (fila: any) => void;
-  color?: 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning';
+  color?: "primary" | "secondary" | "error" | "info" | "success" | "warning";
 }
 
 interface Columna {
   id: string;
   label: string;
-  align?: 'left' | 'center' | 'right';
+  align?: "left" | "center" | "right";
   width?: string | number;
-  formato?: 'fecha' | 'numero' | 'texto';
+  formato?: "fecha" | "numero" | "texto";
   multilinea?: boolean;
   render?: (value: any, row: any) => ReactNode;
 }
@@ -52,8 +53,8 @@ export const TablaAvanzada = ({
   totalFilas,
   paginacion = true,
   filasPorPagina: filasPorPaginaDefault = 10,
-  emptyMessage = 'No hay datos para mostrar',
-  maxAltura
+  emptyMessage = "No hay datos para mostrar",
+  maxAltura,
 }: TablaAvanzadaProps) => {
   const [pagina, setPagina] = useState(0);
   const [filasPorPagina, setFilasPorPagina] = useState(filasPorPaginaDefault);
@@ -67,38 +68,40 @@ export const TablaAvanzada = ({
     setPagina(nuevaPagina);
   };
 
-  const handleCambioFilasPorPagina = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleCambioFilasPorPagina = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     setFilasPorPagina(parseInt(event.target.value, 10));
     setPagina(0);
   };
 
   const formatearValor = (valor: any, formato?: string) => {
-    if (valor === null || valor === undefined) return '—';
-    
-    if (formato === 'fecha') {
+    if (valor === null || valor === undefined) return "—";
+
+    if (formato === "fecha") {
       try {
         const fecha = new Date(valor);
-        return fecha.toLocaleDateString('es-AR');
+        return fecha.toLocaleDateString("es-AR");
       } catch {
         return valor;
       }
     }
-    
-    if (formato === 'numero') {
-      return typeof valor === 'number' ? valor.toLocaleString('es-AR') : valor;
+
+    if (formato === "numero") {
+      return typeof valor === "number" ? valor.toLocaleString("es-AR") : valor;
     }
-    
+
     return valor;
   };
 
   return (
-    <Paper 
-      sx={{ 
+    <Paper
+      sx={{
         boxShadow: 0,
         borderWidth: 1,
-        borderStyle: 'solid',
+        borderStyle: "solid",
         borderColor: themeTokens.colors.border,
-        overflow: 'hidden'
+        overflow: "hidden",
       }}
     >
       <TableContainer sx={{ maxHeight: maxAltura }}>
@@ -108,12 +111,12 @@ export const TablaAvanzada = ({
               {columnas.map((col) => (
                 <TableCell
                   key={col.id}
-                  align={col.align || 'left'}
+                  align={col.align || "left"}
                   width={col.width}
                   sx={{
                     fontWeight: 600,
                     backgroundColor: themeTokens.colors.surfaceHover,
-                    whiteSpace: 'nowrap'
+                    whiteSpace: "nowrap",
                   }}
                 >
                   {col.label}
@@ -125,7 +128,7 @@ export const TablaAvanzada = ({
                   sx={{
                     fontWeight: 600,
                     backgroundColor: themeTokens.colors.surfaceHover,
-                    whiteSpace: 'nowrap'
+                    whiteSpace: "nowrap",
                   }}
                 >
                   ACCIONES
@@ -133,12 +136,12 @@ export const TablaAvanzada = ({
               )}
             </TableRow>
           </TableHead>
-          
+
           <TableBody>
             {filasMostradas.length === 0 ? (
               <TableRow>
-                <TableCell 
-                  colSpan={columnas.length + (acciones.length > 0 ? 1 : 0)} 
+                <TableCell
+                  colSpan={columnas.length + (acciones.length > 0 ? 1 : 0)}
                   align="center"
                   sx={{ py: 4 }}
                 >
@@ -151,9 +154,9 @@ export const TablaAvanzada = ({
                   {columnas.map((col) => (
                     <TableCell
                       key={col.id}
-                      align={col.align || 'left'}
-                      sx={{ 
-                        py: col.multilinea ? 2 : 1.5
+                      align={col.align || "left"}
+                      sx={{
+                        py: col.multilinea ? 2 : 1.5,
                       }}
                     >
                       {col.render ? (
@@ -161,9 +164,13 @@ export const TablaAvanzada = ({
                       ) : col.multilinea ? (
                         <Box>
                           {String(formatearValor(fila[col.id], col.formato))
-                            .split('\n')
+                            .split("\n")
                             .map((linea, i) => (
-                              <Typography key={i} variant="body2" sx={{ lineHeight: 1.5 }}>
+                              <Typography
+                                key={i}
+                                variant="body2"
+                                sx={{ lineHeight: 1.5 }}
+                              >
                                 {linea}
                               </Typography>
                             ))}
@@ -173,16 +180,20 @@ export const TablaAvanzada = ({
                       )}
                     </TableCell>
                   ))}
-                  
+
                   {acciones.length > 0 && (
                     <TableCell align="center">
-                      <Stack direction="row" spacing={1} justifyContent="center">
+                      <Stack
+                        direction="row"
+                        spacing={1}
+                        justifyContent="center"
+                      >
                         {acciones.map((accion, i) => (
                           <IconButton
                             key={i}
                             size="small"
                             onClick={() => accion.onClick(fila)}
-                            color={accion.color || 'primary'}
+                            color={accion.color || "primary"}
                             title={accion.label}
                           >
                             {accion.icono}
@@ -197,21 +208,18 @@ export const TablaAvanzada = ({
           </TableBody>
         </Table>
       </TableContainer>
-      
-      {paginacion && total > 0 && (
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25, 50]}
-          component="div"
-          count={total}
-          rowsPerPage={filasPorPagina}
-          page={pagina}
-          onPageChange={handleCambioPagina}
-          onRowsPerPageChange={handleCambioFilasPorPagina}
-          labelRowsPerPage="Filas por página:"
-          labelDisplayedRows={({ from, to, count }) => `${from}-${to} de ${count}`}
-          sx={{
-            borderTop: `1px solid ${themeTokens.colors.border}`,
+
+      {total > 0 && (
+        <PaginacionSistema
+          totalElementos={total}
+          elementosPorPagina={filasPorPagina}
+          paginaActual={pagina + 1} // porque TablePagination usa 0-index, nosotros 1-index
+          onPaginaChange={(nuevaPagina) => setPagina(nuevaPagina - 1)}
+          onElementosPorPaginaChange={(nuevoValor) => {
+            setFilasPorPagina(nuevoValor);
+            setPagina(0);
           }}
+          opcionesPorPagina={[5, 10, 25, 50]}
         />
       )}
     </Paper>

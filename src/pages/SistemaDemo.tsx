@@ -29,6 +29,7 @@ import {
   CampoTextoReadOnly,
   CampoArchivo,
   TabsSistema,
+  PaginacionSistema
 } from "../components/sistema";
 import {
   Edit,
@@ -39,6 +40,54 @@ import {
   Pending as PendingIcon,
 } from "@mui/icons-material";
 import { themeTokens } from "@/components/sistema/theme";
+
+// ============================================================
+// COMPONENTE DEMO PARA PAGINACIÓN INTERACTIVA
+// ============================================================
+function DemoPaginacionInteractiva() {
+  const [pagina, setPagina] = useState(1);
+  const [porPagina, setPorPagina] = useState(5);
+  
+  // Datos de ejemplo
+  const todosLosItems = Array.from({ length: 23 }, (_, i) => ({
+    id: i + 1,
+    nombre: `Elemento ${i + 1}`,
+    descripcion: `Descripción del elemento ${i + 1}`
+  }));
+  
+  const inicio = (pagina - 1) * porPagina;
+  const fin = inicio + porPagina;
+  const itemsPagina = todosLosItems.slice(inicio, fin);
+  const total = todosLosItems.length;
+  
+  return (
+    <Box>
+      {/* Listado de ejemplo */}
+      <Stack spacing={1} sx={{ mb: 2 }}>
+        {itemsPagina.map(item => (
+          <Paper 
+            key={item.id} 
+            sx={{ p: 1.5, bgcolor: themeTokens.colors.border, color: 'white' }}
+          >
+            <Typography variant="body2">
+              <strong>{item.nombre}</strong> - {item.descripcion}
+            </Typography>
+          </Paper>
+        ))}
+      </Stack>
+      
+      {/* Paginación */}
+      <PaginacionSistema
+        totalElementos={total}
+        elementosPorPagina={porPagina}
+        paginaActual={pagina}
+        onPaginaChange={setPagina}
+        onElementosPorPaginaChange={setPorPagina}
+        opcionesPorPagina={[5, 10, 15]}
+      />
+    </Box>
+  );
+}
 
 // ============================================================
 // COMPONENTE DE EJEMPLO PARA EL MODAL (UNO SOLO)
@@ -446,6 +495,66 @@ export const SistemaDemo = () => {
         </Typography>
       </Paper>
 
+      {/* ========== PAGINACIÓN SISTEMA ========== */}
+<Paper
+  sx={{ p: 3, mb: 4, bgcolor: '#414141', borderRadius: 1.2, border: "1px solid #eef2f6" }}
+>
+  <Typography variant="h5" gutterBottom sx={{ color: "white", fontWeight: 500, mb: 2 }}>
+    9. PaginacionSistema (Independiente)
+  </Typography>
+  <Typography variant="body2" sx={{ color: "white", mb: 3 }}>
+    Componente de paginación reutilizable. Puede usarse con tablas, tarjetas, listados, o cualquier conjunto de datos.
+  </Typography>
+
+  <Box sx={{ mb: 4 }}>
+    <Typography variant="subtitle2" sx={{ color: "#ffc107", mb: 2 }}>
+      📌 Ejemplo 1: Paginación básica (10 elementos por página)
+    </Typography>
+    <Paper sx={{ p: 2, bgcolor: '#2d2d2d' }}>
+      <PaginacionSistema
+        totalElementos={42}
+        elementosPorPagina={10}
+        paginaActual={1}
+        onPaginaChange={(pagina) => console.log("Página:", pagina)}
+        onElementosPorPaginaChange={(porPagina) => console.log("Por página:", porPagina)}
+      />
+    </Paper>
+  </Box>
+
+  <Box sx={{ mb: 4 }}>
+    <Typography variant="subtitle2" sx={{ color: "#ffc107", mb: 2 }}>
+      📌 Ejemplo 2: Con estado interactivo (simula cambio de página)
+    </Typography>
+    <Box sx={{ bgcolor: '#2d2d2d', p: 2 }}>
+      <DemoPaginacionInteractiva />
+    </Box>
+  </Box>
+
+  <Box>
+    <Typography variant="subtitle2" sx={{ color: "#ffc107", mb: 2 }}>
+      📌 Ejemplo 3: Sin selector de cantidad (paginación simple)
+    </Typography>
+    <Paper sx={{ p: 2, bgcolor: '#2d2d2d' }}>
+      <PaginacionSistema
+        totalElementos={28}
+        elementosPorPagina={10}
+        paginaActual={2}
+        onPaginaChange={(pagina) => console.log("Página:", pagina)}
+        mostrarSelector={false}
+      />
+    </Paper>
+  </Box>
+
+  <Typography
+    variant="caption"
+    sx={{ color: "text.secondary", display: "block", mt: 2 }}
+  >
+    💡 Tip: Este componente funciona con cualquier listado (tarjetas, resultados de búsqueda, catálogos). 
+    No está atado a tablas. Puedes usarlo con `useState` para manejar la página actual y la cantidad por página.
+  </Typography>
+</Paper>
+
+
       {/* ========== BADGE CONTADOR ========== */}
       <Paper
         sx={{ p: 3, mb: 4, bgcolor: '#414141' , borderRadius: 1.2, border: "1px solid #eef2f6" }}
@@ -686,6 +795,7 @@ export const SistemaDemo = () => {
         </Typography>
       </Paper>
 
+      
       {/* ========== CÓDIGO DE EJEMPLO ========== */}
 <Paper sx={{ p: 3, borderRadius: 1.2, bgcolor: "#1e1e1e", color: "#d4d4d4" }}>
   <Typography variant="h5" gutterBottom sx={{ fontWeight: 500, color: "white", mb: 2 }}>

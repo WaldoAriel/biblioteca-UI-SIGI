@@ -1,3 +1,5 @@
+import { PaginacionSistema } from "./PaginacionSistema";
+
 export { CabeceraPagina } from "./CabeceraPagina";
 export { BadgeEstado } from "./BadgeEstado";
 export { TablaAgrupada } from "./TablaAgrupada";
@@ -21,3 +23,4 @@ export { CampoSwitch } from './CampoSwitch';
 export { CampoTextoReadOnly } from './CampoTextoReadOnly';
 export { CampoArchivo } from './CampoArchivo';
 export { TabsSistema } from './TabsSistema';
+export {PaginacionSistema} from './PaginacionSistema';

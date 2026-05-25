@@ -12,6 +12,7 @@ const tokens = {
     border: '#eef2f6',
     surfaceHover: '#F8F9FF',
     surfaceHoverDark: '#f0f2f8',
+    primaryTenue: '#eef5f7',
     
   },
   
@@ -21,6 +22,7 @@ const tokens = {
     modal: 3,
     table: 3,
     input: 6,
+    paginacion:2,
   },
   
   shadows: {
