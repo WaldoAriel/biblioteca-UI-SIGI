@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Paper,
   Typography,
@@ -41,6 +41,8 @@ import {
 } from "@mui/icons-material";
 import { themeTokens } from "@/components/sistema/theme";
 
+
+
 // ============================================================
 // COMPONENTE DEMO PARA PAGINACIÓN INTERACTIVA
 // ============================================================
@@ -63,7 +65,7 @@ function DemoPaginacionInteractiva() {
   return (
     <Box>
       {/* Listado de ejemplo */}
-      <Stack spacing={1} sx={{ mb: 2 }}>
+<Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, mb: 2 }}>
         {itemsPagina.map(item => (
           <Paper 
             key={item.id} 
@@ -74,7 +76,7 @@ function DemoPaginacionInteractiva() {
             </Typography>
           </Paper>
         ))}
-      </Stack>
+      </Box>
       
       {/* Paginación */}
       <PaginacionSistema
@@ -85,6 +87,66 @@ function DemoPaginacionInteractiva() {
         onElementosPorPaginaChange={setPorPagina}
         opcionesPorPagina={[5, 10, 15]}
       />
+    </Box>
+  );
+}
+
+// ============================================================
+// COMPONENTE DEMO PARA TABLA SERVER-SIDE
+// ============================================================
+function DemoTablaServerSide() {
+  const [pagina, setPagina] = useState(0);
+  const [porPagina, setPorPagina] = useState(5);
+  const [filas, setFilas] = useState<any[]>([]);
+  const [total, setTotal] = useState(0);
+  const [cargando, setCargando] = useState(false);
+
+  // Simular datos totales (42 registros)
+  const generarDatos = () => {
+    return Array.from({ length: 42 }, (_, i) => ({
+      id: i + 1,
+      nombre: `Registro ${i + 1}`,
+      email: `registro${i + 1}@ejemplo.com`,
+      estado: i % 3 === 0 ? 'activo' : i % 3 === 1 ? 'pendiente' : 'rechazado'
+    }));
+  };
+
+  useEffect(() => {
+    setCargando(true);
+    // Simular fetch a API
+    setTimeout(() => {
+      const todos = generarDatos();
+      const inicio = pagina * porPagina;
+      const fin = inicio + porPagina;
+      setFilas(todos.slice(inicio, fin));
+      setTotal(todos.length);
+      setCargando(false);
+    }, 500);
+  }, [pagina, porPagina]);
+
+  return (
+    <Box>
+      {cargando && (
+        <Typography sx={{ color: '#ffc107', mb: 2 }}>🔄 Cargando datos de página {pagina + 1}...</Typography>
+      )}
+      <TablaAvanzada
+        columnas={[
+          { id: 'id', label: 'ID', width: '80px' },
+          { id: 'nombre', label: 'Nombre' },
+          { id: 'email', label: 'Email' },
+          { id: 'estado', label: 'Estado', render: (val) => <BadgeEstado estado={val} /> }
+        ]}
+        filas={filas}
+        totalFilas={total}
+        paginaActual={pagina}
+        onPaginaChange={setPagina}
+        onFilasPorPaginaChange={setPorPagina}
+        filasPorPagina={porPagina}
+        emptyMessage="No hay datos"
+      />
+      <Typography variant="caption" sx={{ color: '#ffc107', display: 'block', mt: 2 }}>
+        💡 Simula server-side: Cada cambio de página "trae" solo 5 registros del backend (delay 500ms)
+      </Typography>
     </Box>
   );
 }
@@ -232,13 +294,13 @@ export const SistemaDemo = () => {
           Muestra estados visuales consistentes en todo el sistema.
         </Typography>
 
-        <Stack direction="row" spacing={2} flexWrap="wrap" useFlexGap>
+<Box sx={{ display: 'flex', gap: 3, flexWrap: 'wrap' }}>
           <BadgeEstado estado="borrador" />
           <BadgeEstado estado="activo" />
           <BadgeEstado estado="pendiente" />
           <BadgeEstado estado="rechazado" />
           <BadgeEstado estado="aprobado" customLabel="Aprobado" />
-        </Stack>
+        </Box>
       </Paper>
       {/* ========== CARD FORMULARIO ========== */}
       <Paper
@@ -468,6 +530,18 @@ export const SistemaDemo = () => {
         </Typography>
       </Paper>
 
+      {/*========== DEMO DE TABLA AVANZADA CON SERVER-SIDE ==========*/}
+<Paper sx={{ p: 3, mb: 4, bgcolor: '#414141', borderRadius: 1.2 }}>
+  <Typography variant="h5" gutterBottom sx={{ color: "white", fontWeight: 500 }}>
+    TablaAvanzada - Modo Server Side
+  </Typography>
+  <Typography variant="body2" sx={{ color: "white", mb: 3 }}>
+    La paginación se maneja externamente, simulando llamadas a API.
+  </Typography>
+  
+  <DemoTablaServerSide />
+</Paper>
+
       {/* ========== CAMPO BÚSQUEDA ========== */}
       <Paper
         sx={{ p: 3, mb: 4, bgcolor: '#414141' , borderRadius: 1.2, border: "1px solid #eef2f6" }}
@@ -567,7 +641,7 @@ export const SistemaDemo = () => {
           notificaciones, etc.
         </Typography>
 
-        <Stack direction="row" spacing={3} flexWrap="wrap" useFlexGap>
+<Box sx={{ display: 'flex', gap: 3, flexWrap: 'wrap' }}>
           <BadgeContador
             contador={4}
             texto="solicitudes pendientes"
@@ -581,7 +655,7 @@ export const SistemaDemo = () => {
             color="error"
             icono={<PendingIcon fontSize="small" />}
           />
-        </Stack>
+        </Box>
 
         <Typography
           variant="caption"
