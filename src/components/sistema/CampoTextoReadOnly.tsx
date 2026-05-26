@@ -1,5 +1,7 @@
 import { TextField, TextFieldProps, Paper } from '@mui/material';
 import { themeTokens } from './theme';
+import React from 'react';
+
 export const CampoTextoReadOnly = (props: TextFieldProps) => {
   return (
     <Paper 

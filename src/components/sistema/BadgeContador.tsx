@@ -2,6 +2,7 @@
 import { Badge, Chip, Box, Typography } from '@mui/material';
 import { ReactNode } from 'react';
 import { themeTokens } from './theme';
+import React from 'react';
 
 interface BadgeContadorProps {
   contador: number;

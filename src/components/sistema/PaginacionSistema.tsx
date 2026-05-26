@@ -9,6 +9,7 @@ import {
   Paper,
 } from "@mui/material";
 import { themeTokens } from "./theme";
+import React from 'react';
 
 interface PaginacionSistemaProps {
   /** Total de elementos en toda la colección */

@@ -4,6 +4,7 @@ import { NavigateNext as NavigateNextIcon } from '@mui/icons-material';
 import { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';  // ← Importar useNavigate
 import { themeTokens } from './theme';
+import React from 'react';
 
 interface BreadcrumbItem {
   label: string;

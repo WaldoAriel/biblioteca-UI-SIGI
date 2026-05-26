@@ -1,6 +1,6 @@
 import { Modal, Box, Fade, Backdrop } from '@mui/material';
 import { themeTokens } from './theme';
-
+import React from 'react';
 
 interface ModalSistemaProps {
   open: boolean;

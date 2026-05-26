@@ -2,6 +2,7 @@
 import { Container, Box } from '@mui/material';
 import { ReactNode } from 'react';
 import { themeTokens } from './theme';
+import React from 'react';
 
 interface LayoutPaginaProps {
   children: ReactNode;

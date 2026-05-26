@@ -2,6 +2,7 @@
 import { Box, Tab, Tabs, Typography, Paper } from '@mui/material';
 import { useState, ReactNode } from 'react';
 import { themeTokens } from './theme';
+import React from 'react';
 
 interface TabPanelProps {
   children?: ReactNode;

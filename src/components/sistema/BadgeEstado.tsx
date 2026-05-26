@@ -1,6 +1,7 @@
 // src/components/sistema/BadgeEstado.tsx
 import { Chip, ChipProps } from '@mui/material';
 import { themeTokens } from './theme';
+import React from 'react';
 
 type EstadoValido = 'borrador' | 'activo' | 'pendiente' | 'rechazado' | 'error';
 

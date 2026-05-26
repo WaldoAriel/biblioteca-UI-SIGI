@@ -2,6 +2,7 @@
 import { Box, Typography, Button, Chip, Paper } from '@mui/material';
 import { ReactNode } from 'react';
 import { themeTokens } from './theme';
+import React from 'react';
 
 interface SeccionConBotonProps {
   titulo: string;

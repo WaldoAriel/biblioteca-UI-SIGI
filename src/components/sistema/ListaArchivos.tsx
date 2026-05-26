@@ -1,4 +1,5 @@
 // src/components/sistema/ListaArchivos.tsx
+import React from 'react';
 import {
   Box,
   Paper,

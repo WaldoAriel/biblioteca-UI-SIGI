@@ -3,7 +3,7 @@ import { Button, Box, Typography, Stack, Paper } from '@mui/material';
 import { CloudUpload as CloudUploadIcon } from '@mui/icons-material';
 import { useRef } from 'react';
 import { themeTokens } from './theme';
-
+import React from 'react';
 interface CampoArchivoProps {
   label: string;
   onFileChange?: (file: File | null) => void;

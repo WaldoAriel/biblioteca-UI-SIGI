@@ -1,5 +1,6 @@
 // src/components/sistema/TarjetaDocumento.tsx
 import { useState } from 'react';
+import React from 'react';
 import {
   Card,
   CardContent,

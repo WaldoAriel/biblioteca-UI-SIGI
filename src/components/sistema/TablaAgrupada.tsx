@@ -1,5 +1,6 @@
 // src/components/sistema/TablaAgrupada.tsx
 import { useState } from 'react';
+import React from 'react';
 import {
   Table,
   TableBody,

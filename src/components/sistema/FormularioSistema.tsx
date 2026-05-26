@@ -11,6 +11,7 @@ import { Close as CloseIcon } from "@mui/icons-material";
 import { ReactNode } from "react";
 import { ModalSistema } from "./ModalSistema";
 import { themeTokens } from "./theme";
+import React from 'react';
 
 interface FormularioSistemaProps {
   titulo: string;

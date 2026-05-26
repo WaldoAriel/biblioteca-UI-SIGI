@@ -2,6 +2,7 @@
 import { Box, Typography, Grid } from "@mui/material";
 import { TarjetaDocumento } from "./TarjetaDocumento";
 import { themeTokens } from "./theme";
+import React from 'react';
 
 interface Documento {
   id: string;

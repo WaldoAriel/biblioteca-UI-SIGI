@@ -1,6 +1,7 @@
   import { TextField, InputAdornment, IconButton, Paper } from "@mui/material";
   import { Search as SearchIcon, Clear as ClearIcon } from "@mui/icons-material";
   import { themeTokens } from "./theme";
+import React from 'react';
 
   interface CampoBusquedaProps {
     valor: string;
