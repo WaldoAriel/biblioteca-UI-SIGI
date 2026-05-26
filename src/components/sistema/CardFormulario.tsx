@@ -1,75 +1,63 @@
 // src/components/sistema/CardFormulario.tsx
-import { Card, CardContent, Grid, Typography } from '@mui/material';
+import { Card, CardContent, Typography, Grid, Box } from '@mui/material';
 import { ReactNode } from 'react';
 import { themeTokens } from './theme';
+
 interface Campo {
   label: string;
-  valor: ReactNode | string | number;
+  valor: ReactNode;
 }
 
 interface CardFormularioProps {
-  titulo?: string;
+  titulo: string;
   campos: Campo[];
   columnas?: 1 | 2 | 3;
 }
 
-export const CardFormulario = ({ 
-  titulo, 
-  campos = [], 
-  columnas = 2
-}: CardFormularioProps) => {
+export const CardFormulario = ({ titulo, campos, columnas = 2 }: CardFormularioProps) => {
+  // Calcular el tamaño basado en columnas
+  const getSize = () => {
+    switch (columnas) {
+      case 1: return { xs: 12 };
+      case 2: return { xs: 12, sm: 6 };
+      case 3: return { xs: 12, sm: 6, md: 4 };
+      default: return { xs: 12, sm: 6 };
+    }
+  };
+
   return (
-    <Card 
-      sx={{ 
+    <Card
+      sx={{
         boxShadow: 0,
-        border: themeTokens.colors.border,
-        mb: 3,
-        overflow: 'visible'
+        border: `1px solid ${themeTokens.colors.border}`,
+        borderRadius: themeTokens.borderRadius.card,
       }}
     >
       <CardContent sx={{ p: 3 }}>
-        {titulo && (
-          <Typography 
-            variant="h6" 
-            sx={{ 
-              fontWeight: 600, 
-              color: 'primary.main',
-              mb: 2.5,
-              pb: 1,
-              borderBottom: '1px solid #eef2f6'  // ⚠️ Este también
-            }}
-          >
-            {titulo}
-          </Typography>
-        )}
-        
+        <Typography variant="h6" gutterBottom sx={{ fontWeight: 600, mb: 2 }}>
+          {titulo}
+        </Typography>
+
         <Grid container spacing={3}>
-          {campos.map((campo, idx) => (
-            <Grid item xs={12} sm={12/columnas} key={idx}>
-              <Typography 
-                variant="caption" 
-                sx={{ 
-                  color: 'text.secondary',
+          {campos.map((campo, index) => (
+            <Grid size={getSize()} key={index}>  {/* ← NUEVA sintaxis */}
+              <Typography
+                variant="caption"
+                sx={{
+                  color: themeTokens.colors.textSecondary,
                   display: 'block',
                   mb: 0.5,
-                  fontSize: '0.75rem',
+                  textTransform: 'uppercase',
                   fontWeight: 500,
-                  letterSpacing: '0.5px'
+                  fontSize: '0.7rem',
                 }}
               >
                 {campo.label}
               </Typography>
               
-              <Typography 
-                variant="body1" 
-                sx={{ 
-                  color: 'text.primary',
-                  fontWeight: 500,
-                  wordBreak: 'break-word'
-                }}
-              >
-                {campo.valor || '—'}
-              </Typography>
+              <Box sx={{ typography: 'body1', color: themeTokens.colors.textPrimary }}>
+                {campo.valor}
+              </Box>
             </Grid>
           ))}
         </Grid>

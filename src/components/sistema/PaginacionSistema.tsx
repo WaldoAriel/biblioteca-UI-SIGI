@@ -1,6 +1,14 @@
 // src/components/sistema/PaginacionSistema.tsx
-import { Box, Pagination, Typography, Select, MenuItem, Stack, Paper } from '@mui/material';
-import { themeTokens } from './theme';
+import {
+  Box,
+  Pagination,
+  Typography,
+  Select,
+  MenuItem,
+  Stack,
+  Paper,
+} from "@mui/material";
+import { themeTokens } from "./theme";
 
 interface PaginacionSistemaProps {
   /** Total de elementos en toda la colección */
@@ -34,97 +42,102 @@ export const PaginacionSistema = ({
   const totalPaginas = Math.ceil(totalElementos / elementosPorPagina);
   const desde = (paginaActual - 1) * elementosPorPagina + 1;
   const hasta = Math.min(paginaActual * elementosPorPagina, totalElementos);
-  
+
   const textoPorDefecto = `Mostrando ${desde}-${hasta} de ${totalElementos} resultados`;
-  
+
   // Si no hay elementos o solo una página, no mostrar paginación
-  if (totalElementos === 0 || totalPaginas <= 1 && !mostrarSelector) {
+  if (totalElementos === 0 || (totalPaginas <= 1 && !mostrarSelector)) {
     return null;
   }
 
   return (
-    <Paper 
-      sx={{ 
-        p: 3, 
-        border: '1px solid #eef2f6',
-        boxShadow: 0,
-        height: '100%',
-        bgcolor: themeTokens.colors.primaryTenue,        
-      }}
-    >
-    <Box
+    <Paper
       sx={{
-        display: 'flex',
-        flexDirection: { xs: 'column', sm: 'row' },
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        gap: 2,
-        pt: 2,
-        mt: 2,
-        borderTop: `1px solid ${themeTokens.colors.border}`,
+        p: 3,
+        border: "1px solid #eef2f6",
+        boxShadow: 0,
+        height: "100%",
+        bgcolor: themeTokens.colors.primaryTenue,
       }}
     >
-      {/* Info de resultados */}
-      <Typography
-        variant="body2"
+      <Box
         sx={{
-          color: themeTokens.colors.textSecondary,
-          fontSize: '0.875rem',
+          display: "flex",
+          flexDirection: { xs: "column", sm: "row" },
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: 2,
+          pt: 2,
+          mt: 2,
+          borderTop: `1px solid ${themeTokens.colors.border}`,
         }}
       >
-        {textoInfo || textoPorDefecto}
-      </Typography>
-
-      {/* Controles de paginación */}
-      <Stack direction="row" spacing={2} alignItems="center">
-        {/* Selector de elementos por página */}
-        {mostrarSelector && onElementosPorPaginaChange && (
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-            <Typography variant="body2" sx={{ color: themeTokens.colors.textSecondary }}>
-              Mostrar:
-            </Typography>
-            <Select
-              value={elementosPorPagina}
-              onChange={(e) => onElementosPorPaginaChange(Number(e.target.value))}
-              size="small"
-              sx={{
-                minWidth: 70,
-                '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: themeTokens.colors.border,
-                },
-              }}
-            >
-              {opcionesPorPagina.map((opcion) => (
-                <MenuItem key={opcion} value={opcion}>
-                  {opcion}
-                </MenuItem>
-              ))}
-            </Select>
-          </Box>
-        )}
-
-        {/* Paginación MUI */}
-        <Pagination
-          count={totalPaginas}
-          page={paginaActual}
-          onChange={(_, page) => onPaginaChange(page)}
-          color="primary"
-          shape="rounded"
-          size="medium"
-          showFirstButton
-          showLastButton
+        {/* Info de resultados */}
+        <Typography
+          variant="body2"
           sx={{
-            '& .MuiPaginationItem-root': {
-              borderRadius: themeTokens.borderRadius.paginacion,
-              transition: themeTokens.transitions.fast,
-              '&:hover': {
-                transform: 'translateY(-1px)',
-              },
-            },
+            color: themeTokens.colors.textSecondary,
+            fontSize: "0.875rem",
           }}
-        />
-      </Stack>
-    </Box>
+        >
+          {textoInfo || textoPorDefecto}
+        </Typography>
+
+        {/* Controles de paginación */}
+        <Stack direction="row" spacing={2} sx={{ alignItems: "center" }}>
+          {/* Selector de elementos por página */}
+          {mostrarSelector && onElementosPorPaginaChange && (
+            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: themeTokens.colors.textSecondary }}
+              >
+                Mostrar:
+              </Typography>
+              <Select
+                value={elementosPorPagina}
+                onChange={(e) =>
+                  onElementosPorPaginaChange(Number(e.target.value))
+                }
+                size="small"
+                sx={{
+                  minWidth: 70,
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    borderColor: themeTokens.colors.border,
+                  },
+                }}
+              >
+                {opcionesPorPagina.map((opcion) => (
+                  <MenuItem key={opcion} value={opcion}>
+                    {opcion}
+                  </MenuItem>
+                ))}
+              </Select>
+            </Box>
+          )}
+
+          {/* Paginación MUI */}
+          <Pagination
+            count={totalPaginas}
+            page={paginaActual}
+            onChange={(_, page) => onPaginaChange(page)}
+            color="primary"
+            shape="rounded"
+            size="medium"
+            showFirstButton
+            showLastButton
+            sx={{
+              "& .MuiPaginationItem-root": {
+                borderRadius: themeTokens.borderRadius.paginacion,
+                transition: themeTokens.transitions.fast,
+                "&:hover": {
+                  transform: "translateY(-1px)",
+                },
+              },
+            }}
+          />
+        </Stack>
+      </Box>
     </Paper>
   );
 };

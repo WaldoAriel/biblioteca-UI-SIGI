@@ -14,7 +14,7 @@ const SwitchPersonalizado = styled(Switch)(({ theme }) => ({
     '&.Mui-checked': {
       transform: 'translateX(24px)',
       '& + .MuiSwitch-track': {
-        backgroundColor: 'theme.palette.primary.main',
+        backgroundColor: theme.palette.primary.main,
         opacity: 0.2,
         border: 0,
       },
@@ -32,7 +32,7 @@ const SwitchPersonalizado = styled(Switch)(({ theme }) => ({
   },
   '& .MuiSwitch-track': {
     borderRadius: 28,
-    backgroundColor: '#E0E0E0',
+    backgroundColor: theme.palette.primary.main,
     opacity: 1,
     transition: theme.transitions.create(['background-color'], {
       duration: 500,

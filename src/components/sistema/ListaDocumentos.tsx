@@ -1,7 +1,7 @@
 // src/components/sistema/ListaDocumentos.tsx
-import { Box, Typography, Grid } from '@mui/material';
-import { TarjetaDocumento } from './TarjetaDocumento';
-import { themeTokens } from './theme';
+import { Box, Typography, Grid } from "@mui/material";
+import { TarjetaDocumento } from "./TarjetaDocumento";
+import { themeTokens } from "./theme";
 
 interface Documento {
   id: string;
@@ -9,7 +9,7 @@ interface Documento {
   nombreArchivo: string;
   tamaño: string;
   observacion?: string;
-  estado: 'pendiente' | 'validado' | 'rechazado';
+  estado: "pendiente" | "validado" | "rechazado";
 }
 
 interface ListaDocumentosProps {
@@ -23,23 +23,34 @@ interface ListaDocumentosProps {
 }
 
 export const ListaDocumentos = ({
-  titulo = 'Documentación adjunta',
+  titulo = "Documentación adjunta",
   documentos,
   onObservacionChange,
   onAceptar,
   onRechazar,
   readonly = false,
-  columnas = 2
+  columnas = 2,
 }: ListaDocumentosProps) => {
   return (
     <Box>
-      <Typography variant="h6" sx={{ fontWeight: 600, color: 'primary.main', mb: 2 }}>
+      <Typography
+        variant="h6"
+        sx={{ fontWeight: 600, color: "primary.main", mb: 2 }}
+      >
         {titulo}
       </Typography>
-      
+
       <Grid container spacing={2}>
         {documentos.map((doc) => (
-          <Grid item xs={12} sm={6} md={12 / columnas} key={doc.id}>
+          <Grid
+            size={{
+              xs: 12,
+              sm: 6,
+              md: 12 / columnas,
+            }}
+            key={doc.id}
+          >
+            {" "}
             <TarjetaDocumento
               titulo={doc.titulo}
               nombreArchivo={doc.nombreArchivo}

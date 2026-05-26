@@ -26,7 +26,7 @@ export const SeccionConBoton = ({
       sx={{ 
         p: 2, 
         mb: 3, 
-        bgcolor: 'background.paper',  // fondo blanco
+        bgcolor: 'background.paper',
         borderRadius: 1.2,
         border: `1px solid ${themeTokens.colors.border}`
       }}

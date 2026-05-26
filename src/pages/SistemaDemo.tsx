@@ -29,7 +29,7 @@ import {
   CampoTextoReadOnly,
   CampoArchivo,
   TabsSistema,
-  PaginacionSistema
+  PaginacionSistema,
 } from "../components/sistema";
 import {
   Edit,
@@ -41,35 +41,33 @@ import {
 } from "@mui/icons-material";
 import { themeTokens } from "@/components/sistema/theme";
 
-
-
 // ============================================================
 // COMPONENTE DEMO PARA PAGINACIÓN INTERACTIVA
 // ============================================================
 function DemoPaginacionInteractiva() {
   const [pagina, setPagina] = useState(1);
   const [porPagina, setPorPagina] = useState(5);
-  
+
   // Datos de ejemplo
   const todosLosItems = Array.from({ length: 23 }, (_, i) => ({
     id: i + 1,
     nombre: `Elemento ${i + 1}`,
-    descripcion: `Descripción del elemento ${i + 1}`
+    descripcion: `Descripción del elemento ${i + 1}`,
   }));
-  
+
   const inicio = (pagina - 1) * porPagina;
   const fin = inicio + porPagina;
   const itemsPagina = todosLosItems.slice(inicio, fin);
   const total = todosLosItems.length;
-  
+
   return (
     <Box>
       {/* Listado de ejemplo */}
-<Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, mb: 2 }}>
-        {itemsPagina.map(item => (
-          <Paper 
-            key={item.id} 
-            sx={{ p: 1.5, bgcolor: themeTokens.colors.border, color: 'white' }}
+      <Box sx={{ display: "flex", flexDirection: "column", gap: 1, mb: 2 }}>
+        {itemsPagina.map((item) => (
+          <Paper
+            key={item.id}
+            sx={{ p: 1.5, bgcolor: themeTokens.colors.border, color: "white" }}
           >
             <Typography variant="body2">
               <strong>{item.nombre}</strong> - {item.descripcion}
@@ -77,7 +75,7 @@ function DemoPaginacionInteractiva() {
           </Paper>
         ))}
       </Box>
-      
+
       {/* Paginación */}
       <PaginacionSistema
         totalElementos={total}
@@ -107,7 +105,7 @@ function DemoTablaServerSide() {
       id: i + 1,
       nombre: `Registro ${i + 1}`,
       email: `registro${i + 1}@ejemplo.com`,
-      estado: i % 3 === 0 ? 'activo' : i % 3 === 1 ? 'pendiente' : 'rechazado'
+      estado: i % 3 === 0 ? "activo" : i % 3 === 1 ? "pendiente" : "rechazado",
     }));
   };
 
@@ -127,14 +125,20 @@ function DemoTablaServerSide() {
   return (
     <Box>
       {cargando && (
-        <Typography sx={{ color: '#ffc107', mb: 2 }}>🔄 Cargando datos de página {pagina + 1}...</Typography>
+        <Typography sx={{ color: "#ffc107", mb: 2 }}>
+          🔄 Cargando datos de página {pagina + 1}...
+        </Typography>
       )}
       <TablaAvanzada
         columnas={[
-          { id: 'id', label: 'ID', width: '80px' },
-          { id: 'nombre', label: 'Nombre' },
-          { id: 'email', label: 'Email' },
-          { id: 'estado', label: 'Estado', render: (val) => <BadgeEstado estado={val} /> }
+          { id: "id", label: "ID", width: "80px" },
+          { id: "nombre", label: "Nombre" },
+          { id: "email", label: "Email" },
+          {
+            id: "estado",
+            label: "Estado",
+            render: (val) => <BadgeEstado estado={val} />,
+          },
         ]}
         filas={filas}
         totalFilas={total}
@@ -144,8 +148,12 @@ function DemoTablaServerSide() {
         filasPorPagina={porPagina}
         emptyMessage="No hay datos"
       />
-      <Typography variant="caption" sx={{ color: '#ffc107', display: 'block', mt: 2 }}>
-        💡 Simula server-side: Cada cambio de página "trae" solo 5 registros del backend (delay 500ms)
+      <Typography
+        variant="caption"
+        sx={{ color: "#ffc107", display: "block", mt: 2 }}
+      >
+        💡 Simula server-side: Cada cambio de página "trae" solo 5 registros del
+        backend (delay 500ms)
       </Typography>
     </Box>
   );
@@ -183,7 +191,7 @@ function EjemploFormularioModal() {
         botonSecundario={{ label: "Cancelar", onClick: () => setOpen(false) }}
       >
         <Grid container spacing={2}>
-          <Grid item xs={12} sm={6}>
+          <Grid size={{ xs: 12, sm: 6 }}>
             <CampoTexto
               label="Nombre completo"
               placeholder="Juan Pérez"
@@ -193,7 +201,7 @@ function EjemploFormularioModal() {
               }
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid size={{ xs: 12, sm: 6 }}>
             <CampoTexto
               label="Email"
               type="email"
@@ -204,7 +212,7 @@ function EjemploFormularioModal() {
               }
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid size={{ xs: 12, sm: 6 }}>
             <CampoFecha
               label="Fecha de nacimiento"
               value={formData.fechaNacimiento}
@@ -213,7 +221,7 @@ function EjemploFormularioModal() {
               }
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid size={{ xs: 12, sm: 6 }}>
             <CampoSelect
               label="Carrera"
               opciones={[
@@ -250,51 +258,71 @@ export const SistemaDemo = () => {
         estos componentes.
       </Alert>
 
-        {/* ========== CABECERA PAGINA ========== */}
-        <Paper
-          sx={{ p: 3, mb: 4, bgcolor: '#414141' , borderRadius: 1.2, border: "1px solid #eef2f6" }}
+      {/* ========== CABECERA PAGINA ========== */}
+      <Paper
+        sx={{
+          p: 3,
+          mb: 4,
+          bgcolor: "#414141",
+          borderRadius: 1.2,
+          border: "1px solid #eef2f6",
+        }}
+      >
+        <Typography
+          variant="h5"
+          gutterBottom
+          sx={{ color: "white", fontWeight: 500, mb: 2 }}
         >
-          <Typography variant="h5" gutterBottom sx={{ color: "white", fontWeight: 500, mb: 2 }}>
-            1. CabeceraPagina
-          </Typography>
-          <Typography variant="body2" sx={{ color: "white", mb: 3 }}>
-            Único componente que combina breadcrumb + título + descripción +
-            botones de acción.
-          </Typography>
+          1. CabeceraPagina
+        </Typography>
+        <Typography variant="body2" sx={{ color: "white", mb: 3 }}>
+          Único componente que combina breadcrumb + título + descripción +
+          botones de acción.
+        </Typography>
 
-          <CabeceraPagina
-            breadcrumbs={[
-              { label: "Panel docente", href: "#" },
-              { label: "Administrativos" },
-            ]}
-            titulo="Gestión de planes de estudio"
-            descripcion="Configure y administre la estructura curricular académica de las carreras institucionales."
-            acciones={[
-              {
-                label: "Descartar cambios",
-                variante: "outlined",
-                onClick: () => alert("Descartar"),
-              },
-              {
-                label: "Guardar plan",
-                variante: "contained",
-                onClick: () => alert("Guardar"),
-              },
-            ]}
-          />
-        </Paper>
+        <CabeceraPagina
+          breadcrumbs={[
+            { label: "Panel docente", href: "#" },
+            { label: "Administrativos" },
+          ]}
+          titulo="Gestión de planes de estudio"
+          descripcion="Configure y administre la estructura curricular académica de las carreras institucionales."
+          acciones={[
+            {
+              label: "Descartar cambios",
+              variante: "outlined",
+              onClick: () => alert("Descartar"),
+            },
+            {
+              label: "Guardar plan",
+              variante: "contained",
+              onClick: () => alert("Guardar"),
+            },
+          ]}
+        />
+      </Paper>
       {/* ========== BADGE ESTADO ========== */}
       <Paper
-        sx={{ p: 3, mb: 4, bgcolor: '#414141' , borderRadius: 1.2, border: "1px solid #eef2f6" }}
+        sx={{
+          p: 3,
+          mb: 4,
+          bgcolor: "#414141",
+          borderRadius: 1.2,
+          border: "1px solid #eef2f6",
+        }}
       >
-          <Typography variant="h5" gutterBottom sx={{ color: "white", fontWeight: 500, mb: 2 }}>
+        <Typography
+          variant="h5"
+          gutterBottom
+          sx={{ color: "white", fontWeight: 500, mb: 2 }}
+        >
           2. BadgeEstado
         </Typography>
-          <Typography variant="body2" sx={{ color: "white", mb: 3 }}>
+        <Typography variant="body2" sx={{ color: "white", mb: 3 }}>
           Muestra estados visuales consistentes en todo el sistema.
         </Typography>
 
-<Box sx={{ display: 'flex', gap: 3, flexWrap: 'wrap' }}>
+        <Box sx={{ display: "flex", gap: 3, flexWrap: "wrap" }}>
           <BadgeEstado estado="borrador" />
           <BadgeEstado estado="activo" />
           <BadgeEstado estado="pendiente" />
@@ -304,9 +332,19 @@ export const SistemaDemo = () => {
       </Paper>
       {/* ========== CARD FORMULARIO ========== */}
       <Paper
-        sx={{ p: 3, mb: 4, bgcolor: '#414141' , borderRadius: 1.2, border: "1px solid #eef2f6" }}
+        sx={{
+          p: 3,
+          mb: 4,
+          bgcolor: "#414141",
+          borderRadius: 1.2,
+          border: "1px solid #eef2f6",
+        }}
       >
-        <Typography variant="h5" gutterBottom sx={{ color: "white", fontWeight: 500, mb: 2 }}>
+        <Typography
+          variant="h5"
+          gutterBottom
+          sx={{ color: "white", fontWeight: 500, mb: 2 }}
+        >
           3. CardFormulario
         </Typography>
         <Typography variant="body2" sx={{ color: "white", mb: 3 }}>
@@ -328,9 +366,19 @@ export const SistemaDemo = () => {
       </Paper>
       {/* ========== SECCIÓN CON BOTÓN ========== */}
       <Paper
-        sx={{ p: 3, mb: 4, bgcolor: '#414141' , borderRadius: 1.2, border: "1px solid #eef2f6" }}
+        sx={{
+          p: 3,
+          mb: 4,
+          bgcolor: "#414141",
+          borderRadius: 1.2,
+          border: "1px solid #eef2f6",
+        }}
       >
-        <Typography variant="h5" gutterBottom sx={{ color: "white", fontWeight: 500, mb: 2 }}>
+        <Typography
+          variant="h5"
+          gutterBottom
+          sx={{ color: "white", fontWeight: 500, mb: 2 }}
+        >
           4. SeccionConBoton
         </Typography>
         <Typography variant="body2" sx={{ color: "white", mb: 3 }}>
@@ -359,9 +407,19 @@ export const SistemaDemo = () => {
       </Paper>
       {/* ========== TABLA AGRUPADA ========== */}
       <Paper
-        sx={{ p: 3, mb: 4, bgcolor: '#414141' , borderRadius: 1.2, border: "1px solid #eef2f6" }}
+        sx={{
+          p: 3,
+          mb: 4,
+          bgcolor: "#414141",
+          borderRadius: 1.2,
+          border: "1px solid #eef2f6",
+        }}
       >
-        <Typography variant="h5" gutterBottom sx={{ color: "white", fontWeight: 500, mb: 2 }}>
+        <Typography
+          variant="h5"
+          gutterBottom
+          sx={{ color: "white", fontWeight: 500, mb: 2 }}
+        >
           5. TablaAgrupada
         </Typography>
         <Typography variant="body2" sx={{ color: "white", mb: 3 }}>
@@ -404,9 +462,19 @@ export const SistemaDemo = () => {
       </Paper>
       {/* ========== TABLA SIMPLE ========== */}
       <Paper
-        sx={{ p: 3, mb: 4, bgcolor: '#414141' , borderRadius: 1.2, border: "1px solid #eef2f6" }}
+        sx={{
+          p: 3,
+          mb: 4,
+          bgcolor: "#414141",
+          borderRadius: 1.2,
+          border: "1px solid #eef2f6",
+        }}
       >
-        <Typography variant="h5" gutterBottom sx={{ color: "white", fontWeight: 500, mb: 2 }}>
+        <Typography
+          variant="h5"
+          gutterBottom
+          sx={{ color: "white", fontWeight: 500, mb: 2 }}
+        >
           6. TablaSimple
         </Typography>
         <Typography variant="body2" sx={{ color: "white", mb: 3 }}>
@@ -435,9 +503,19 @@ export const SistemaDemo = () => {
       </Paper>
       {/* ========== TABLA AVANZADA ========== */}
       <Paper
-        sx={{ p: 3, mb: 4, bgcolor: '#414141' , borderRadius: 1.2, border: "1px solid #eef2f6" }}
+        sx={{
+          p: 3,
+          mb: 4,
+          bgcolor: "#414141",
+          borderRadius: 1.2,
+          border: "1px solid #eef2f6",
+        }}
       >
-        <Typography variant="h5" gutterBottom sx={{ color: "white", fontWeight: 500, mb: 2 }}>
+        <Typography
+          variant="h5"
+          gutterBottom
+          sx={{ color: "white", fontWeight: 500, mb: 2 }}
+        >
           7. TablaAvanzada
         </Typography>
         <Typography variant="body2" sx={{ color: "white", mb: 3 }}>
@@ -518,7 +596,7 @@ export const SistemaDemo = () => {
             },
           ]}
           totalFilas={12}
-          filasPorPagina={3}
+          filasPorPagina={5}
         />
 
         <Typography
@@ -531,22 +609,36 @@ export const SistemaDemo = () => {
       </Paper>
 
       {/*========== DEMO DE TABLA AVANZADA CON SERVER-SIDE ==========*/}
-<Paper sx={{ p: 3, mb: 4, bgcolor: '#414141', borderRadius: 1.2 }}>
-  <Typography variant="h5" gutterBottom sx={{ color: "white", fontWeight: 500 }}>
-    TablaAvanzada - Modo Server Side
-  </Typography>
-  <Typography variant="body2" sx={{ color: "white", mb: 3 }}>
-    La paginación se maneja externamente, simulando llamadas a API.
-  </Typography>
-  
-  <DemoTablaServerSide />
-</Paper>
+      <Paper sx={{ p: 3, mb: 4, bgcolor: "#414141", borderRadius: 1.2 }}>
+        <Typography
+          variant="h5"
+          gutterBottom
+          sx={{ color: "white", fontWeight: 500 }}
+        >
+          TablaAvanzada - Modo Server Side
+        </Typography>
+        <Typography variant="body2" sx={{ color: "white", mb: 3 }}>
+          La paginación se maneja externamente, simulando llamadas a API.
+        </Typography>
+
+        <DemoTablaServerSide />
+      </Paper>
 
       {/* ========== CAMPO BÚSQUEDA ========== */}
       <Paper
-        sx={{ p: 3, mb: 4, bgcolor: '#414141' , borderRadius: 1.2, border: "1px solid #eef2f6" }}
+        sx={{
+          p: 3,
+          mb: 4,
+          bgcolor: "#414141",
+          borderRadius: 1.2,
+          border: "1px solid #eef2f6",
+        }}
       >
-        <Typography variant="h5" gutterBottom sx={{ color: "white", fontWeight: 500, mb: 2 }}>
+        <Typography
+          variant="h5"
+          gutterBottom
+          sx={{ color: "white", fontWeight: 500, mb: 2 }}
+        >
           8. CampoBusqueda
         </Typography>
         <Typography variant="body2" sx={{ color: "white", mb: 3 }}>
@@ -570,70 +662,94 @@ export const SistemaDemo = () => {
       </Paper>
 
       {/* ========== PAGINACIÓN SISTEMA ========== */}
-<Paper
-  sx={{ p: 3, mb: 4, bgcolor: '#414141', borderRadius: 1.2, border: "1px solid #eef2f6" }}
->
-  <Typography variant="h5" gutterBottom sx={{ color: "white", fontWeight: 500, mb: 2 }}>
-    9. PaginacionSistema (Independiente)
-  </Typography>
-  <Typography variant="body2" sx={{ color: "white", mb: 3 }}>
-    Componente de paginación reutilizable. Puede usarse con tablas, tarjetas, listados, o cualquier conjunto de datos.
-  </Typography>
+      <Paper
+        sx={{
+          p: 3,
+          mb: 4,
+          bgcolor: "#414141",
+          borderRadius: 1.2,
+          border: "1px solid #eef2f6",
+        }}
+      >
+        <Typography
+          variant="h5"
+          gutterBottom
+          sx={{ color: "white", fontWeight: 500, mb: 2 }}
+        >
+          9. PaginacionSistema (Independiente)
+        </Typography>
+        <Typography variant="body2" sx={{ color: "white", mb: 3 }}>
+          Componente de paginación reutilizable. Puede usarse con tablas,
+          tarjetas, listados, o cualquier conjunto de datos.
+        </Typography>
 
-  <Box sx={{ mb: 4 }}>
-    <Typography variant="subtitle2" sx={{ color: "#ffc107", mb: 2 }}>
-      📌 Ejemplo 1: Paginación básica (10 elementos por página)
-    </Typography>
-    <Paper sx={{ p: 2, bgcolor: '#2d2d2d' }}>
-      <PaginacionSistema
-        totalElementos={42}
-        elementosPorPagina={10}
-        paginaActual={1}
-        onPaginaChange={(pagina) => console.log("Página:", pagina)}
-        onElementosPorPaginaChange={(porPagina) => console.log("Por página:", porPagina)}
-      />
-    </Paper>
-  </Box>
+        <Box sx={{ mb: 4 }}>
+          <Typography variant="subtitle2" sx={{ color: "#ffc107", mb: 2 }}>
+            📌 Ejemplo 1: Paginación básica (10 elementos por página)
+          </Typography>
+          <Paper sx={{ p: 2, bgcolor: "#2d2d2d" }}>
+            <PaginacionSistema
+              totalElementos={42}
+              elementosPorPagina={10}
+              paginaActual={1}
+              onPaginaChange={(pagina) => console.log("Página:", pagina)}
+              onElementosPorPaginaChange={(porPagina) =>
+                console.log("Por página:", porPagina)
+              }
+            />
+          </Paper>
+        </Box>
 
-  <Box sx={{ mb: 4 }}>
-    <Typography variant="subtitle2" sx={{ color: "#ffc107", mb: 2 }}>
-      📌 Ejemplo 2: Con estado interactivo (simula cambio de página)
-    </Typography>
-    <Box sx={{ bgcolor: '#2d2d2d', p: 2 }}>
-      <DemoPaginacionInteractiva />
-    </Box>
-  </Box>
+        <Box sx={{ mb: 4 }}>
+          <Typography variant="subtitle2" sx={{ color: "#ffc107", mb: 2 }}>
+            📌 Ejemplo 2: Con estado interactivo (simula cambio de página)
+          </Typography>
+          <Box sx={{ bgcolor: "#2d2d2d", p: 2 }}>
+            <DemoPaginacionInteractiva />
+          </Box>
+        </Box>
 
-  <Box>
-    <Typography variant="subtitle2" sx={{ color: "#ffc107", mb: 2 }}>
-      📌 Ejemplo 3: Sin selector de cantidad (paginación simple)
-    </Typography>
-    <Paper sx={{ p: 2, bgcolor: '#2d2d2d' }}>
-      <PaginacionSistema
-        totalElementos={28}
-        elementosPorPagina={10}
-        paginaActual={2}
-        onPaginaChange={(pagina) => console.log("Página:", pagina)}
-        mostrarSelector={false}
-      />
-    </Paper>
-  </Box>
+        <Box>
+          <Typography variant="subtitle2" sx={{ color: "#ffc107", mb: 2 }}>
+            📌 Ejemplo 3: Sin selector de cantidad (paginación simple)
+          </Typography>
+          <Paper sx={{ p: 2, bgcolor: "#2d2d2d" }}>
+            <PaginacionSistema
+              totalElementos={28}
+              elementosPorPagina={10}
+              paginaActual={2}
+              onPaginaChange={(pagina) => console.log("Página:", pagina)}
+              mostrarSelector={false}
+            />
+          </Paper>
+        </Box>
 
-  <Typography
-    variant="caption"
-    sx={{ color: "text.secondary", display: "block", mt: 2 }}
-  >
-    💡 Tip: Este componente funciona con cualquier listado (tarjetas, resultados de búsqueda, catálogos). 
-    No está atado a tablas. Puedes usarlo con `useState` para manejar la página actual y la cantidad por página.
-  </Typography>
-</Paper>
-
+        <Typography
+          variant="caption"
+          sx={{ color: "text.secondary", display: "block", mt: 2 }}
+        >
+          💡 Tip: Este componente funciona con cualquier listado (tarjetas,
+          resultados de búsqueda, catálogos). No está atado a tablas. Puedes
+          usarlo con `useState` para manejar la página actual y la cantidad por
+          página.
+        </Typography>
+      </Paper>
 
       {/* ========== BADGE CONTADOR ========== */}
       <Paper
-        sx={{ p: 3, mb: 4, bgcolor: '#414141' , borderRadius: 1.2, border: "1px solid #eef2f6" }}
+        sx={{
+          p: 3,
+          mb: 4,
+          bgcolor: "#414141",
+          borderRadius: 1.2,
+          border: "1px solid #eef2f6",
+        }}
       >
-        <Typography variant="h5" gutterBottom sx={{ color: "white", fontWeight: 500, mb: 2 }}>
+        <Typography
+          variant="h5"
+          gutterBottom
+          sx={{ color: "white", fontWeight: 500, mb: 2 }}
+        >
           9. BadgeContador
         </Typography>
         <Typography variant="body2" sx={{ color: "white", mb: 3 }}>
@@ -641,7 +757,7 @@ export const SistemaDemo = () => {
           notificaciones, etc.
         </Typography>
 
-<Box sx={{ display: 'flex', gap: 3, flexWrap: 'wrap' }}>
+        <Box sx={{ display: "flex", gap: 3, flexWrap: "wrap" }}>
           <BadgeContador
             contador={4}
             texto="solicitudes pendientes"
@@ -668,9 +784,19 @@ export const SistemaDemo = () => {
 
       {/* ========== LISTA DOCUMENTOS (TARJETAS) ========== */}
       <Paper
-        sx={{ p: 3, mb: 4, bgcolor: '#414141' , borderRadius: 1.2, border: "1px solid #eef2f6" }}
+        sx={{
+          p: 3,
+          mb: 4,
+          bgcolor: "#414141",
+          borderRadius: 1.2,
+          border: "1px solid #eef2f6",
+        }}
       >
-        <Typography variant="h5" gutterBottom sx={{ color: "white", fontWeight: 500, mb: 2 }}>
+        <Typography
+          variant="h5"
+          gutterBottom
+          sx={{ color: "white", fontWeight: 500, mb: 2 }}
+        >
           10. ListaDocumentos (Tarjetas)
         </Typography>
         <Typography variant="body2" sx={{ color: "white", mb: 3 }}>
@@ -730,9 +856,19 @@ export const SistemaDemo = () => {
       </Paper>
       {/* SECCIÓN 11: Modal */}
       <Paper
-        sx={{ p: 3, mb: 4, bgcolor: '#414141' , borderRadius: 1.2, border: "1px solid #eef2f6" }}
+        sx={{
+          p: 3,
+          mb: 4,
+          bgcolor: "#414141",
+          borderRadius: 1.2,
+          border: "1px solid #eef2f6",
+        }}
       >
-        <Typography variant="h5" gutterBottom sx={{ color: "white", fontWeight: 500, mb: 2 }}>
+        <Typography
+          variant="h5"
+          gutterBottom
+          sx={{ color: "white", fontWeight: 500, mb: 2 }}
+        >
           11. FormularioSistema + Modal
         </Typography>
         <Typography variant="body2" sx={{ color: "white", mb: 3 }}>
@@ -743,9 +879,19 @@ export const SistemaDemo = () => {
 
       {/* ========== NUEVOS COMPONENTES DE FORMULARIO ========== */}
       <Paper
-        sx={{ p: 3, mb: 4, bgcolor: '#414141' , borderRadius: 1.2, border: "1px solid #eef2f6" }}
+        sx={{
+          p: 3,
+          mb: 4,
+          bgcolor: "#414141",
+          borderRadius: 1.2,
+          border: "1px solid #eef2f6",
+        }}
       >
-        <Typography variant="h5" gutterBottom sx={{ color: "white", fontWeight: 500, mb: 2 }}>
+        <Typography
+          variant="h5"
+          gutterBottom
+          sx={{ color: "white", fontWeight: 500, mb: 2 }}
+        >
           12. Nuevos Componentes de Formulario
         </Typography>
         <Typography variant="body2" sx={{ color: "white", mb: 3 }}>
@@ -755,7 +901,7 @@ export const SistemaDemo = () => {
 
         <Grid container spacing={3}>
           {/* CampoSwitch */}
-          <Grid item xs={12} sm={6}>
+          <Grid size={{ xs: 12, sm: 6 }}>
             <Typography variant="subtitle2" gutterBottom>
               CampoSwitch (Activo/Inactivo)
             </Typography>
@@ -764,7 +910,7 @@ export const SistemaDemo = () => {
           </Grid>
 
           {/* CampoTextoReadOnly */}
-          <Grid item xs={12} sm={6}>
+          <Grid size={{ xs: 12, sm: 6 }}>
             <Typography variant="subtitle2" gutterBottom>
               CampoTextoReadOnly
             </Typography>
@@ -772,7 +918,7 @@ export const SistemaDemo = () => {
           </Grid>
 
           {/* CampoArchivo */}
-          <Grid item xs={12} sm={6}>
+          <Grid size={{ xs: 12, sm: 6 }}>
             <Typography variant="subtitle2" gutterBottom>
               CampoArchivo
             </Typography>
@@ -783,7 +929,7 @@ export const SistemaDemo = () => {
           </Grid>
 
           {/* TabsSistema */}
-          <Grid item xs={12}>
+          <Grid size={{ xs: 12 }}>
             <Typography variant="subtitle2" gutterBottom>
               TabsSistema (Pestañas)
             </Typography>
@@ -793,19 +939,19 @@ export const SistemaDemo = () => {
                   label: "Datos Personales",
                   content: (
                     <Grid container spacing={2}>
-                      <Grid item xs={12} sm={6}>
+                      <Grid size={{ xs: 12, sm: 6 }}>
                         <CampoTextoReadOnly label="DNI" value="38.452.122" />
                       </Grid>
-                      <Grid item xs={12} sm={6}>
+                      <Grid size={{ xs: 12, sm: 6 }}>
                         <CampoTextoReadOnly label="Apellido" value="Alvarez" />
                       </Grid>
-                      <Grid item xs={12} sm={6}>
+                      <Grid size={{ xs: 12, sm: 6 }}>
                         <CampoTexto
                           label="Teléfono"
                           placeholder="+54 9 351 123-4567"
                         />
                       </Grid>
-                      <Grid item xs={12}>
+                      <Grid size={{ xs: 12 }}>
                         <CampoTexto
                           label="Dirección"
                           multiline
@@ -820,20 +966,20 @@ export const SistemaDemo = () => {
                   label: "Datos Académicos",
                   content: (
                     <Grid container spacing={2}>
-                      <Grid item xs={12} sm={6}>
+                      <Grid size={{ xs: 12, sm: 6 }}>
                         <CampoTexto label="Nombre" placeholder="Martina" />
                       </Grid>
-                      <Grid item xs={12} sm={6}>
+                      <Grid size={{ xs: 12, sm: 6 }}>
                         <CampoTexto
                           label="Email"
                           type="email"
                           placeholder="m.alvarez@email.com"
                         />
                       </Grid>
-                      <Grid item xs={12} sm={6}>
+                      <Grid size={{ xs: 12, sm: 6 }}>
                         <CampoFecha label="Fecha de nacimiento" />
                       </Grid>
-                      <Grid item xs={12}>
+                      <Grid size={{ xs: 12 }}>
                         <CampoSwitch label="Activo" defaultChecked />
                       </Grid>
                     </Grid>
@@ -843,13 +989,13 @@ export const SistemaDemo = () => {
                   label: "Documentación",
                   content: (
                     <Grid container spacing={2}>
-                      <Grid item xs={12}>
+                      <Grid size={{ xs: 12 }}>
                         <CampoArchivo label="Analítico Secundario" />
                       </Grid>
-                      <Grid item xs={12}>
+                      <Grid size={{ xs: 12 }}>
                         <CampoArchivo label="Partida de Nacimiento" />
                       </Grid>
-                      <Grid item xs={12}>
+                      <Grid size={{ xs: 12 }}>
                         <CampoArchivo label="DNI" accept="image/*" />
                       </Grid>
                     </Grid>
@@ -869,25 +1015,32 @@ export const SistemaDemo = () => {
         </Typography>
       </Paper>
 
-      
       {/* ========== CÓDIGO DE EJEMPLO ========== */}
-<Paper sx={{ p: 3, borderRadius: 1.2, bgcolor: "#1e1e1e", color: "#d4d4d4" }}>
-  <Typography variant="h5" gutterBottom sx={{ fontWeight: 500, color: "white", mb: 2 }}>
-    📋 Código de ejemplo
-  </Typography>
-  <Typography variant="body2" sx={{ mb: 2, color: "#9cdcfe" }}>
-    Cómo usar los componentes en tus pantallas:
-  </Typography>
-  
-  <pre style={{ 
-    background: "#2d2d2d", 
-    padding: 16, 
-    borderRadius: 8, 
-    overflow: "auto",
-    fontSize: "13px",
-    lineHeight: 1.5
-  }}>
-{`import { 
+      <Paper
+        sx={{ p: 3, borderRadius: 1.2, bgcolor: "#1e1e1e", color: "#d4d4d4" }}
+      >
+        <Typography
+          variant="h5"
+          gutterBottom
+          sx={{ fontWeight: 500, color: "white", mb: 2 }}
+        >
+          📋 Código de ejemplo
+        </Typography>
+        <Typography variant="body2" sx={{ mb: 2, color: "#9cdcfe" }}>
+          Cómo usar los componentes en tus pantallas:
+        </Typography>
+
+        <pre
+          style={{
+            background: "#2d2d2d",
+            padding: 16,
+            borderRadius: 8,
+            overflow: "auto",
+            fontSize: "13px",
+            lineHeight: 1.5,
+          }}
+        >
+          {`import { 
   LayoutPagina, 
   CabeceraPagina, 
   CardFormulario, 
@@ -979,12 +1132,13 @@ export function PantallaCompleta() {
     </LayoutPagina>
   );
 }`}
-  </pre>
-  
-  <Typography variant="body2" sx={{ mt: 2, color: "#6a9955" }}>
-    💡 IMPORTANTE: No usar MUI directamente. Siempre importar desde @/components/sistema
-  </Typography>
-</Paper>
+        </pre>
+
+        <Typography variant="body2" sx={{ mt: 2, color: "#6a9955" }}>
+          💡 IMPORTANTE: No usar MUI directamente. Siempre importar desde
+          @/components/sistema
+        </Typography>
+      </Paper>
     </LayoutPagina>
   );
 };

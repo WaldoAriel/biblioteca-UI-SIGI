@@ -131,7 +131,7 @@ export const TarjetaDocumento = ({
 
         {/* Botones de acción (solo si está pendiente y no es readonly) */}
         {!readonly && estado === 'pendiente' && (
-          <Stack direction="row" spacing={2} justifyContent="flex-end">
+<Stack direction="row" spacing={2} sx={{ justifyContent: 'flex-end' }}>
             <IconButton
               onClick={onAceptar}
               sx={{
