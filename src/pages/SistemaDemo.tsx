@@ -247,7 +247,7 @@ function EjemploFormularioModal() {
 // ============================================================
 export const SistemaDemo = () => {
   return (
-    <LayoutPagina>
+    <LayoutPagina  sinPadding maxWidth={false}>
       {/* Encabezado */}
       <Typography variant="h4" gutterBottom sx={{ fontWeight: 600 }}>
         📚 Sistema de Componentes

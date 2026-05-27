@@ -13,7 +13,11 @@ const tokens = {
     surfaceHover: '#F8F9FF',
     surfaceHoverDark: '#f0f2f8',
     primaryTenue: '#eef5f7',
-    
+    secondaryLight: "#C6E7FF",
+    textLogout: "#6c757d",
+    activeBar: "#8ECEF7",     // Para el borde activo del sidebar
+    textDark: "#171C22",       // Para íconos y textos oscuros
+    surfaceHoverAlt: "#F0F4FD", // Para el fondo del Search en TopNav
   },
   
   borderRadius: {
@@ -48,10 +52,23 @@ const tokens = {
     fast: '0.1s ease',
     normal: '0.2s ease',
     slow: '0.3s ease',
+
+    sidebarNormal:"0.25s ease",
+    sidebarSlow: "0.5s ease",
+    sidebar: "0.35s cubic-bezier(0.4, 0, 0.2, 1)",
   },
-  
+  layout: {
+  sidebar: {
+    expanded: 288,
+    collapsed: 80,
+  },
+
+  navbar: {
+    height: 72,
+  },
+},
   typography: {
-    fontFamily: 'Poppins, sans-serif',
+    fontFamily: 'Manrope,Poppins, sans-serif',
     weights: {
       regular: 400,
       medium: 500,

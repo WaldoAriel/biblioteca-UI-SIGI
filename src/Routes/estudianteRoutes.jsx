@@ -1,0 +1,10 @@
+export const ESTUDIANTE_ROUTES = {
+    dashboard: "/estudiante/dashboard",
+    perfil: "/estudiante/perfil",
+    legajo: "/estudiante/legajo",
+    calificaciones: "/estudiante/calificaciones",
+    mesas: "/estudiante/mesas-de-examen",
+    asistencia: "/estudiante/asistencia",
+    notificaciones: "/estudiante/notificaciones",
+    inscripcionesUc: "/estudiante/inscripciones-uc",
+};
