@@ -23,6 +23,8 @@ const tokens = {
     table: 3,
     input: 6,
     paginacion:2,
+    perfilCard:7,
+    avatar: 999,
   },
   
   shadows: {

@@ -1,5 +1,5 @@
 import { PaginacionSistema } from "./PaginacionSistema";
-
+export {PerfilCard} from "./PerfilCard";
 export { CabeceraPagina } from "./CabeceraPagina";
 export { BadgeEstado } from "./BadgeEstado";
 export { TablaAgrupada } from "./TablaAgrupada";
