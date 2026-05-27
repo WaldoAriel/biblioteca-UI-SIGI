@@ -1,6 +1,7 @@
 export const usuarioMock = {
     id: 1,
-    nombre: 'Juan Pérez',
+    nombre: 'Juan',
+    apellido: 'Pérez',
     rol: 'Ayudante Técnico',
     descripcion: 'Gestioná el ecosistema académico desde tu panel central. Aquí tienes un vistazo rápido al estado actual de la institución.',
     imagenUrl:

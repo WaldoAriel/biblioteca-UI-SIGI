@@ -1041,7 +1041,7 @@ export const SistemaDemo = () => {
   </Typography>
 
   <PerfilCard
-    nombre={usuarioMock.nombre}
+    nombre={`${usuarioMock.nombre} ${usuarioMock.apellido}`}
     rol={usuarioMock.rol}
     descripcion={usuarioMock.descripcion}
     imagenUrl={usuarioMock.imagenUrl}
