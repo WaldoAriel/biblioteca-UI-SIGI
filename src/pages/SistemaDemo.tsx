@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { usuarioMock } from "@/Mocks/UsuarioMocks";
 import {
   Paper,
   Typography,
@@ -252,7 +253,7 @@ function EjemploFormularioModal() {
 // ============================================================
 export const SistemaDemo = () => {
   return (
-    <LayoutPagina>
+    <LayoutPagina  sinPadding maxWidth={false}>
       {/* Encabezado */}
       <Typography variant="h4" gutterBottom sx={{ fontWeight: 600 }}>
         📚 Sistema de Componentes
@@ -1217,6 +1218,38 @@ export const SistemaDemo = () => {
           El contenido de cada tab puede ser cualquier combinación de campos.
         </Typography>
       </Paper>
+
+      {/* ========== PERFIL CARD ========== */}
+<Paper
+  sx={{
+    p: 3,
+    mb: 4,
+    bgcolor: "#414141",
+    borderRadius: 1.2,
+    border: "1px solid #eef2f6",
+  }}
+>
+  <Typography
+    variant="h5"
+    gutterBottom
+    sx={{ color: "white", fontWeight: 500, mb: 2 }}
+  >
+    13. PerfilCard
+  </Typography>
+
+  <Typography variant="body2" sx={{ color: "white", mb: 3 }}>
+    Tarjeta reutilizable para perfiles institucionales de alumnos,
+    docentes y administradores.
+  </Typography>
+
+  <PerfilCard
+    nombre={`${usuarioMock.nombre} ${usuarioMock.apellido}`}
+    rol={usuarioMock.rol}
+    descripcion={usuarioMock.descripcion}
+    imagenUrl={usuarioMock.imagenUrl}
+    editable
+  />
+</Paper>
 
       {/* ========== CÓDIGO DE EJEMPLO ========== */}
       <Paper
