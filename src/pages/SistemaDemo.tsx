@@ -30,8 +30,15 @@ import {
   CampoArchivo,
   TabsSistema,
   PaginacionSistema,
+  ActionCard,
+  MetricCard
 } from "../components/sistema";
 import {
+  People as PeopleIcon,
+  School as SchoolIcon,
+  Assignment as AssignmentIcon,
+  AttachMoney as AttachMoneyIcon,
+  TrendingUp as TrendingUpIcon,
   Edit,
   PictureAsPdf,
   Visibility,
@@ -735,6 +742,202 @@ export const SistemaDemo = () => {
         </Typography>
       </Paper>
 
+      {/* ========== ACTION CARD ========== */}
+      <Paper
+        sx={{
+          p: 3,
+          mb: 4,
+          bgcolor: "#414141",
+          borderRadius: 1.2,
+          border: "1px solid #eef2f6",
+        }}
+      >
+        <Typography
+          variant="h5"
+          gutterBottom
+          sx={{ color: "white", fontWeight: 500, mb: 2 }}
+        >
+          10. ActionCard
+        </Typography>
+        <Typography variant="body2" sx={{ color: "white", mb: 3 }}>
+          Tarjeta de acción con título, descripción y botón. Ideal para paneles
+          de control, solicitudes pendientes, tareas rápidas.
+        </Typography>
+
+        <Grid container spacing={6}>
+          {/* Ejemplo 1: Primary */}
+          <Grid size={{ xs: 12, md: 4 }}>
+            <ActionCard
+              title="Solicitudes pendientes"
+              description="Tienes 4 solicitudes de inscripción esperando revisión"
+              buttonText="Revisar"
+              color="primary"
+              onButtonClick={() => alert("Revisar solicitudes")}
+            />
+          </Grid>
+
+          {/* Ejemplo 2: Error/Urgente */}
+          <Grid size={{ xs: 12, md: 4 }}>
+            <ActionCard
+              title="Documentación vencida"
+              description="Tu documentación caduca en 3 días"
+              buttonText="Actualizar"
+              color="error"
+              buttonVariant="contained"
+              onButtonClick={() => alert("Actualizar documentación")}
+            />
+          </Grid>
+
+          {/* Ejemplo 3: Success */}
+          <Grid size={{ xs: 12, md: 4 }}>
+            <ActionCard
+              title="Inscripción exitosa"
+              description="Te has inscrito correctamente en Desarrollo Web"
+              buttonText="Ver detalles"
+              color="success"
+              buttonVariant="outlined"
+              onButtonClick={() => alert("Ver detalles")}
+            />
+          </Grid>
+
+          {/* Ejemplo 4: Con icono */}
+          <Grid size={{ xs: 12, md: 4 }}>
+            <ActionCard
+              title="Nuevo mensaje"
+              description="Tienes un mensaje sin leer del administrador"
+              buttonText="Leer"
+              color="info"
+              buttonIcon={<EmailIcon />}
+              onButtonClick={() => alert("Abrir mensaje")}
+            />
+          </Grid>
+
+          {/* Ejemplo 5: Variante contenida */}
+          <Grid size={{ xs: 12, md: 4 }}>
+            <ActionCard
+              title="Completar perfil"
+              description="Completa tu perfil para acceder a más funciones"
+              buttonText="Completar ahora"
+              color="secondary"
+              buttonVariant="contained"
+              onButtonClick={() => alert("Completar perfil")}
+            />
+          </Grid>
+
+          {/* Ejemplo 6: Sin hover (opcional) */}
+          <Grid size={{ xs: 12, md: 4 }}>
+            <ActionCard
+              title="Sin animación"
+              description="Esta tarjeta tiene una presentación más simple"
+              buttonText="Aceptar"
+              color="warning"
+              buttonVariant="text"
+              onButtonClick={() => alert("Aceptar")}
+            />
+          </Grid>
+        </Grid>
+
+        <Typography
+          variant="caption"
+          sx={{ color: "text.secondary", display: "block", mt: 2 }}
+        >
+          💡 Tip: Usá la prop `color` para cambiar el color de la línea lateral
+          y del botón. Podés usar: primary, secondary, error, info, success,
+          warning. La prop `buttonVariant` permite: outlined (default),
+          contained, text.
+        </Typography>
+      </Paper>
+
+      {/* ========== METRIC CARD ========== */}
+<Paper
+  sx={{ p: 3, mb: 4, bgcolor: '#414141', borderRadius: 1.2, border: "1px solid #eef2f6" }}
+>
+  <Typography variant="h5" gutterBottom sx={{ color: "white", fontWeight: 500, mb: 2 }}>
+    11. MetricCard
+  </Typography>
+  <Typography variant="body2" sx={{ color: "white", mb: 3 }}>
+    Tarjetas de métricas para dashboards. Muestran valores clave con iconos y badges opcionales.
+  </Typography>
+
+  <Grid container spacing={3}>
+    {/* Estudiantes */}
+    <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+      <MetricCard
+        title="ESTUDIANTES"
+        value="1,234"
+        icon={<PeopleIcon />}
+        color="primary"
+        badgeText="+12%"
+      />
+    </Grid>
+
+    {/* Cursos */}
+    <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+      <MetricCard
+        title="CURSOS ACTIVOS"
+        value="24"
+        icon={<SchoolIcon />}
+        color="success"
+        badgeText="ACTIVOS"
+      />
+    </Grid>
+
+    {/* Inscripciones pendientes */}
+    <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+      <MetricCard
+        title="INSCRIPCIONES"
+        value="156"
+        icon={<AssignmentIcon />}
+        color="warning"
+        badgeText="PENDIENTES"
+      />
+    </Grid>
+
+    {/* Ingresos */}
+    <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+      <MetricCard
+        title="INGRESOS"
+        value="$45,678"
+        icon={<AttachMoneyIcon />}
+        color="info"
+        badgeText="+8%"
+      />
+    </Grid>
+
+    {/* Tasa de aprobación */}
+    <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+      <MetricCard
+        title="TASA APROBACIÓN"
+        value="87%"
+        icon={<TrendingUpIcon />}
+        color="success"
+        valueVariant="h4"
+      />
+    </Grid>
+
+    {/* Con badge a la izquierda */}
+    <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+      <MetricCard
+        title="URGENTES"
+        value="8"
+        icon={<AssignmentIcon />}
+        color="error"
+        badgeText="URGENTE"
+        badgePosition="left"
+      />
+    </Grid>
+  </Grid>
+
+  <Typography
+    variant="caption"
+    sx={{ color: "text.secondary", display: "block", mt: 2 }}
+  >
+    💡 Tip: Usá la prop `color` para cambiar el color de la tarjeta.
+    La prop `badgePosition` permite poner el badge a la izquierda o derecha.
+    Podés ajustar el tamaño del valor con `valueVariant` (h3, h4, h5, h6).
+  </Typography>
+</Paper>
+
       {/* ========== BADGE CONTADOR ========== */}
       <Paper
         sx={{
@@ -750,7 +953,7 @@ export const SistemaDemo = () => {
           gutterBottom
           sx={{ color: "white", fontWeight: 500, mb: 2 }}
         >
-          9. BadgeContador
+          12. BadgeContador
         </Typography>
         <Typography variant="body2" sx={{ color: "white", mb: 3 }}>
           Muestra contadores con estilo. Útil para "4 solicitudes pendientes",
@@ -797,7 +1000,7 @@ export const SistemaDemo = () => {
           gutterBottom
           sx={{ color: "white", fontWeight: 500, mb: 2 }}
         >
-          10. ListaDocumentos (Tarjetas)
+          13. ListaDocumentos (Tarjetas)
         </Typography>
         <Typography variant="body2" sx={{ color: "white", mb: 3 }}>
           Tarjetas para revisión de documentación. Cada documento tiene su
@@ -869,7 +1072,7 @@ export const SistemaDemo = () => {
           gutterBottom
           sx={{ color: "white", fontWeight: 500, mb: 2 }}
         >
-          11. FormularioSistema + Modal
+          14. FormularioSistema + Modal
         </Typography>
         <Typography variant="body2" sx={{ color: "white", mb: 3 }}>
           Modal con overlay #005b7f al 40% + blur.
@@ -892,7 +1095,7 @@ export const SistemaDemo = () => {
           gutterBottom
           sx={{ color: "white", fontWeight: 500, mb: 2 }}
         >
-          12. Nuevos Componentes de Formulario
+          15. Nuevos Componentes de Formulario
         </Typography>
         <Typography variant="body2" sx={{ color: "white", mb: 3 }}>
           Componentes adicionales para formularios: Switch, campos de solo

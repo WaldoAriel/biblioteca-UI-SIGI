@@ -24,3 +24,5 @@ export { CampoTextoReadOnly } from './CampoTextoReadOnly';
 export { CampoArchivo } from './CampoArchivo';
 export { TabsSistema } from './TabsSistema';
 export {PaginacionSistema} from './PaginacionSistema';
+export { ActionCard } from './ActionCard';
+export { MetricCard } from './MetricCard';
