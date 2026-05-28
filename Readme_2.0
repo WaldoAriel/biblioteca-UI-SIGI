@@ -1,0 +1,236 @@
+GUÍA PARA IMPLEMENTAR COMPONENTES REUTILIZABLES
+📌 Antes de empezar
+Requisitos previos:
+
+✅ El proyecto ya tiene instalado @mui/material y @emotion/react
+
+✅ El theme está configurado en src/components/sistema/theme.ts
+
+✅ El ThemeProvider envuelve la aplicación (en main.tsx o App.tsx)
+
+PASO 1: Importar correctamente
+❌ INCORRECTO (no hacer esto)
+tsx
+import { Button, TextField, Card } from '@mui/material';
+✅ CORRECTO (siempre así)
+tsx
+import { 
+  LayoutPagina, 
+  CabeceraPagina, 
+  TablaAvanzada,
+  CampoTexto,
+  BadgeEstado 
+} from '@/components/sistema';
+PASO 2: Estructura básica de una pantalla
+tsx
+import { LayoutPagina, CabeceraPagina } from '@/components/sistema';
+
+export function MiPantalla() {
+  return (
+    <LayoutPagina>
+      <CabeceraPagina
+        titulo="Título de mi pantalla"
+        descripcion="Descripción opcional"
+        acciones={[
+          { label: 'Nuevo', onClick: () => {} },
+          { label: 'Exportar', variante: 'outlined' }
+        ]}
+      />
+      
+      {/* Acá va el contenido de mi pantalla */}
+      
+    </LayoutPagina>
+  );
+}
+PASO 3: Los componentes más usados
+📋 Tablas
+tsx
+// Tabla simple (ordenable)
+<TablaSimple
+  columnas={[
+    { id: 'nombre', label: 'Nombre' },
+    { id: 'email', label: 'Email' }
+  ]}
+  filas={datos}
+/>
+
+// Tabla avanzada (paginación, acciones)
+<TablaAvanzada
+  columnas={columnas}
+  filas={datos}
+  acciones={[
+    { icono: <EditIcon />, label: 'Editar', onClick: (fila) => {} }
+  ]}
+/>
+📝 Formularios
+tsx
+// Campos de formulario
+<CampoTexto 
+  label="Nombre" 
+  value={nombre} 
+  onChange={(e) => setNombre(e.target.value)} 
+/>
+
+<CampoSelect
+  label="Carrera"
+  opciones={[
+    { value: 1, label: 'Desarrollo Web' },
+    { value: 2, label: 'Análisis de Sistemas' }
+  ]}
+  value={carrera}
+  onChange={(e) => setCarrera(e.target.value)}
+/>
+
+<CampoFecha
+  label="Fecha de nacimiento"
+  value={fecha}
+  onChange={(e) => setFecha(e.target.value)}
+/>
+
+<CampoSwitch 
+  label="Activo" 
+  checked={activo} 
+  onChange={(e) => setActivo(e.target.checked)} 
+/>
+🎴 Tarjetas y métricas
+tsx
+// Tarjeta de acción
+<ActionCard
+  title="Solicitudes pendientes"
+  description="Tienes 4 solicitudes sin revisar"
+  buttonText="Revisar"
+  color="primary"
+  onButtonClick={() => {}}
+/>
+
+// Tarjeta de métrica (para dashboards)
+<MetricCard
+  title="ESTUDIANTES"
+  value="1,234"
+  icon={<PeopleIcon />}
+  color="primary"
+  badgeText="+12%"
+/>
+
+// Tarjeta de sección (para perfiles)
+<SectionCard
+  titulo="DATOS PERSONALES"
+  icono={<PersonIcon />}
+  nombre="Juan Pérez"
+  dni="38.452.122"
+  email="juan@email.com"
+/>
+🏷️ Estados y badges
+tsx
+<BadgeEstado estado="activo" />
+<BadgeEstado estado="pendiente" />
+<BadgeEstado estado="rechazado" />
+<BadgeEstado estado="borrador" />
+
+<BadgeContador contador={4} texto="solicitudes" color="warning" />
+🔍 Búsqueda y paginación
+tsx
+// Campo de búsqueda
+<CampoBusqueda 
+  valor={busqueda}
+  onChange={setBusqueda}
+  placeholder="Buscar..."
+/>
+
+// Paginación independiente
+<PaginacionSistema
+  totalElementos={total}
+  elementosPorPagina={10}
+  paginaActual={pagina}
+  onPaginaChange={setPagina}
+/>
+📱 Modales
+tsx
+<FormularioSistema
+  titulo="Nuevo registro"
+  open={open}
+  onClose={() => setOpen(false)}
+  botonPrincipal={{ label: 'Guardar', onClick: handleGuardar }}
+>
+  {/* Contenido del formulario */}
+</FormularioSistema>
+PASO 4: Errores comunes y soluciones
+Error 1: "No encuentro el componente"
+bash
+# Verificar que el index.ts exporte el componente
+# src/components/sistema/index.ts
+export { MiComponente } from './MiComponente';
+Error 2: "Los estilos no se ven"
+tsx
+// Asegurarse que el ThemeProvider envuelve la app
+// src/main.tsx
+import { ThemeProvider } from '@mui/material';
+import { sistemaTheme } from '@/components/sistema/theme';
+
+<ThemeProvider theme={sistemaTheme}>
+  <App />
+</ThemeProvider>
+Error 3: "El modal no se cierra"
+tsx
+// El estado open debe manejarse en el componente padre
+const [open, setOpen] = useState(false);
+
+<FormularioSistema 
+  open={open} 
+  onClose={() => setOpen(false)}
+  // ...
+>
+PASO 5: ¿Dónde ver ejemplos?
+Ejecutar el demo:
+
+bash
+npm run dev
+# Ir a http://localhost:5173 (o la ruta de SistemaDemo)
+Ver el código:
+
+src/pages/SistemaDemo.tsx - Todos los ejemplos funcionando
+
+src/components/sistema/ - Código fuente de cada componente
+
+REGLAS DE ORO
+Regla	Por qué
+1. Nunca importar directamente de MUI	Perdemos consistencia visual
+2. Siempre usar @/components/sistema	Un solo punto de entrada
+3. No hardcodear colores	Usar color="primary" o sx con theme
+4. Revisar SistemaDemo ante dudas	Tiene ejemplos de todo
+5. Preguntar antes de crear un nuevo componente	Quizás ya existe
+CHEATSHEET RÁPIDO (para imprimir)
+tsx
+// IMPORTS
+import { LayoutPagina, CabeceraPagina, TablaAvanzada, CampoTexto } from '@/components/sistema';
+
+// PANTALLA BASE
+<LayoutPagina>
+  <CabeceraPagina titulo="Mi pantalla" />
+  {/* contenido */}
+</LayoutPagina>
+
+// TABLA
+<TablaAvanzada columnas={[...]} filas={datos} />
+
+// FORMULARIO
+<CampoTexto label="Nombre" value={x} onChange={setX} />
+<CampoSelect label="Opciones" opciones={[...]} value={x} onChange={setX} />
+
+// ESTADO
+<BadgeEstado estado="activo" />
+
+// MODAL
+<FormularioSistema open={open} onClose={() => setOpen(false)}>
+  {/* campos */}
+</FormularioSistema>
+¿Necesitan ayuda?
+Si algo no funciona como esperaban:
+
+Revisar que el componente esté importado de @/components/sistema
+
+Verificar que el ThemeProvider está en el root
+
+Comparar con el ejemplo en SistemaDemo
+
+Preguntar al equipo antes de hacer "workarounds"
